@@ -28,6 +28,10 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = 'django-insecure-x250y04$84n6z^zfhe1h&442&a!%@ew7kebmso-a70jaxc&0fh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# this is used when you wanna customize your ow 404 page with 404.html page
+# DEBUG = False
+
+# ALLOWED_HOSTS = ['*']
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -42,6 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blogs',
+    'crispy_forms',
+    'crispy_bootstrap4',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #context processer is the from blog context_processors.py and its function from it
+                'blogs.context_processors.get_categories'
             ],
         },
     },
@@ -131,3 +141,10 @@ STATICFILES_DIRS =[
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#media files ka ayaan halkan ku qorayaa
+MEDIA_URL ='/media/'
+MEDIA_ROOT  = BASE_DIR / 'media'
+# when  making forms reading from django and this crispy form 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
