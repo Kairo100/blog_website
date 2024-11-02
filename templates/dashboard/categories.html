@@ -26,8 +26,8 @@
                     <td>{{cat.category_name}}</td>
                     <td>{{cat.created_at}}</td>
                     <td>{{cat.updated_at}}</td>
-                    <td> <a href=""><i class="fa fa-edit text-primary"></i></a> &nbsp;  
-                       <a href="">  <i class="fa fa-trash text-primary"></i></a>
+                    <td> <a href="{% url 'edit_categories' cat.id %}"><i class="fa fa-edit text-primary"></i></a> &nbsp;  
+                       <a href="{% url 'delete_categories' cat.id %}">  <i class="fa fa-trash text-primary"></i></a>
                 </td>
                   </tr>
                   {%endfor%}
