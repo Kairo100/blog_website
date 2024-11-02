@@ -4,9 +4,9 @@
 
 <h3 class="text-center">Login</h3>
 {% load crispy_forms_tags %}
-<form action=" {% url 'login' %}" method="POST" style="width: 500px; margin: auto;">
+<form action=" {% url 'login' %}" method="POST" class="form-group mx-auto" style="max-width: 90%; margin: auto;">
     {% csrf_token %}
     {{ form | crispy}}
-    <input type="submit" value="Login" class="btn btn-sm btn-warning">
+    <input type="submit" value="Login" class="btn btn-sm btn-primary">
 </form>
 {% endblock %}

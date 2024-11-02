@@ -4,17 +4,17 @@
 <!-- Page content-->
 <div class="container mt-5">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 col-md-12">
             <!-- Post content-->
             <article>
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{single_post.title}}</h1>
+                    <h1 class="fw-bolder mb-1 text-primary">{{single_post.title}}</h1>
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2">Posted on {{single_post.created_at}} by {{single_post.author}}</div>
                     <!-- Post category-->
-                    <a class="badge bg-warning text-decoration-none text-light" href="#!">{{single_post.category}}</a>
+                    <a class="badge bg-primary text-decoration-none text-white" href="#!">{{single_post.category}}</a>
                 </header>
                 <!-- Preview image figure-->
                 <figure class="mb-4"><img class="img-fluid rounded" src="{{single_post.blog_image.url }}" alt="..." /></figure>
@@ -26,18 +26,18 @@
             </article>
         </div>
         <!-- Side widgets-->
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-12">
           
            
             <!-- Categories widget-->
             <div class="card mb-4 p-3">
-                <h4 class="font-italic">Categories</h4>
+                <h4 class="font-italic text-primary">Categories</h4>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <ul class="list-unstyled mb-0">
                                 {% for cat in categories %}
-                                <li><a href="{% url 'posts_by_category' cat.id %}">{{cat.category_name}}</a></li>
+                                <li><a href="{% url 'posts_by_category' cat.id %}" class="text-primary">{{cat.category_name}}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -47,10 +47,10 @@
             </div>
             <!-- Side widget-->
             <div class="card mb-4 p-3">
-                <h4 class="font-italic">Follow Us</h4>
+                <h4 class="font-italic text-primary">Follow Us</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#" class="text-primary">GitHub</a></li>
+                    <li><a href="#" class="text-primary">LinkedIn</a></li>
                 </ol>
             </div>
         </div>

@@ -1,4 +1,3 @@
-
 {% extends 'base/base.html' %}
     
 {% block content %}
@@ -10,23 +9,26 @@ background-blend-mode: overlay;background-size:cover;">
     <div class="col-md-8 px-0">
       <h1 class="display-4 font-italic"><a href="{% url 'blogs' post.slug %}" class="text-light">{{post.title}}</a></h1>
       <p class="lead my-3">{{post.short_description | truncatewords:30}}</p>
+   
+     
       <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
     </div>
   </div>
   {% endif %}
 {% endfor%}
 
-<!-- feautute posts  -->
- <h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">Featured Post</h3>
+<!-- feauture posts  -->
+ <h3 class="text-uppercase text-primary" style="letter-spacing: 2px;">Featured Post</h3>
   <div class="row mb-2">
     {%for post in  featured_post%}
       {% if not forloop.first %}
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-12 col-xs-12">
       <div class="card border-0" >
         <div class="card-body">
-          <h3><a href="{% url 'blogs' post.slug %}" class="text-dark">{{post.title}}</a></h3>
+          <h3><a href="{% url 'blogs' post.slug %}" class="text-primary">{{post.title}}</a></h3>
           <small class="mb-1 text-muted">{{post.created_at | timesince}} ago | {{post.author}}</small>
           <p class="card-text">{{post.short_description | truncatewords:30}}</p>
+          <p class="lead my-3">{{post.blog_body | truncatewords:30}}</p>
         </div>
       </div>
     </div>
@@ -84,8 +86,7 @@ background-blend-mode: overlay;background-size:cover;">
   </main><!-- /.container -->
 
 </div>
-{% endblock %}
-<!-- 
+{% endblock %}<!-- 
 
 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ipsum ex facilis nisi unde quos fuga vel reprehenderit omnis id doloribus, necessitatibus accusamus tempora consequatur, incidunt tenetur libero! Magni, minima deserunt minus et beatae iusto eum consequuntur ipsam suscipit temporibus a vero ex corrupti incidunt obcaecati culpa maxime, alias voluptates sed fugit aspernatur dolorem! Tempore, repudiandae quo quidem magnam adipisci totam cumque temporibus debitis necessitatibus, natus architecto, modi fugit? Accusantium perferendis obcaecati dignissimos eos facere aspernatur itaque qui veniam, non similique, officia placeat quibusdam reiciendis expedita id, vel ad blanditiis vero quos earum rem! Commodi dignissimos quas et officia itaque.
 
