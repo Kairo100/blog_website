@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+    
+{% block content %}
+<div class="row">
+    <!-- left side -->
+{% include './leftside.html' %}
+     <!-- right side -->
+      <div class="col-md-9">
+        <h3 class="text-primary">All Posts</h3>
+        <a href="{% url 'add_posts' %}" class="btn btn-primary text-white float-right mb-3">Add Post</a>
+        <div class="table-responsive">
+            <table class="table table-hover table-sm table-responsive-md">
+                <thead>
+                  <tr>
+                    <th class="d-none d-md-table-cell">Id</th>
+                    <th >Title</th>
+                    <th class="d-none d-md-table-cell">Category</th>
+                    <th class="d-none d-md-table-cell">Author</th>
+                    <th class="d-none d-md-table-cell">Status</th>
+                    <th class="d-none d-md-table-cell">Feacherd</th>
+                    <th >Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts%}
+                  <tr>
+                    <th scope="row" class="d-none d-md-table-cell">{{forloop.counter}}</th>
+                    <td>{{post.title}}</td>
+                    <td class="d-none d-md-table-cell">{{post.category}}</td>
+                    <td class="d-none d-md-table-cell">{{post.author}}</td>
+                    <td class="d-none d-md-table-cell">{{post.status}}</td>
+                    <td class="d-none d-md-table-cell">{{post.is_feacherd}}</td>
+                    <td> <a href="{% url 'edit_posts' post.id %} "><i class="fa fa-edit text-primary"></i></a> &nbsp;  
+                       <a href="{% url 'delete_posts' post.id %}">  <i class="fa fa-trash text-primary"></i></a>
+                </td>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+              </table>
+        </div>
+      
+      </div>
+</div>
+{% endblock %}
