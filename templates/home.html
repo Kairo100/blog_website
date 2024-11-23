@@ -1,93 +1,110 @@
-{% extends 'base/base.html' %}
-    
-{% block content %}
-      <!--  -->
-    {%for post in featured_post%}
-    {%if forloop.first%}
-<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark" style="background-image: url({{post.blog_image.url}});
-background-blend-mode: overlay;background-size:cover;">
-    <div class="col-md-8 px-0">
-      <h1 class="display-4 font-italic"><a href="{% url 'blogs' post.slug %}" class="text-light">{{post.title}}</a></h1>
-      <p class="lead my-3">{{post.short_description | truncatewords:30}}</p>
-   
-     
-      <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-    </div>
-  </div>
-  {% endif %}
-{% endfor%}
 
-<!-- feauture posts  -->
- <h3 class="text-uppercase text-primary" style="letter-spacing: 2px;">Featured Post</h3>
-  <div class="row mb-2">
-    {%for post in  featured_post%}
-      {% if not forloop.first %}
-    <div class="col-md-6 col-sm-12 col-xs-12">
-      <div class="card border-0" >
-        <div class="card-body">
-          <h3><a href="{% url 'blogs' post.slug %}" class="text-primary">{{post.title}}</a></h3>
-          <small class="mb-1 text-muted">{{post.created_at | timesince}} ago | {{post.author}}</small>
-          <p class="card-text">{{post.short_description | truncatewords:30}}</p>
-          <p class="lead my-3">{{post.blog_body | truncatewords:30}}</p>
+
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="main-container">
+  <!-- Navigation is already in header.html -->
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    {% for post in featured_post %}
+      {% if forloop.first %}
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark" style="background-image: url({{ post.blog_image.url }}); background-blend-mode: overlay; background-size: cover;">
+        <div class="col-md-8 px-0">
+          <h1 class="display-4 font-italic"><a href="{% url 'blogs' post.slug %}" class="text-light">{{ post.title }}</a></h1>
+          <p class="lead my-3">{{ post.short_description | truncatewords:30 }}</p>
+          <div class="lead mb-0">
+            <a href="{% url 'blogs' post.slug %}" class="btn btn-primary">Read More</a>
+            {% if not user.is_authenticated %}
+              <a href="{% url 'register' %}" class="btn btn-outline-light ml-2">Subscribe</a>
+            {% endif %}
+          </div>
         </div>
       </div>
-    </div>
-     {% endif  %}
+      {% endif %}
     {% endfor %}
-   
   </div>
 
-<!-- sample posts that is_ferched and published -->
+  <!-- Hot Topics Section -->
+  <h3 class="text-uppercase text-primary" style="letter-spacing: 2px;">Hot Topics</h3>
+  <div class="row mb-4">
+    {% for post in featured_post %}
+      {% if not forloop.first %}
+      <div class="col-md-6">
+        <div class="card border-0">
+          <div class="card-body">
+            <h3><a href="{% url 'blogs' post.slug %}" class="text-primary">{{ post.title }}</a></h3>
+            <img src="{{ post.blog_image.url  }}" alt="" width="100%">
+            <small class="mb-1 text-muted">{{ post.created_at | timesince }} ago | {{ post.author }}</small>
+            <p class="card-text">{{ post.short_description | truncatewords:30 }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- Recent Articles Section -->
   <h3 class="text-uppercase text-primary" style="letter-spacing: 2px;">Recent Articles</h3>
   <main role="main" class="container p-0">
     <div class="row">
       <div class="col-md-8 blog-main">
         {% for post in posts %}
-        <div class="card border-0" >
-          <div class="card-body">
-            <h3><a href="{% url 'blogs' post.slug %}" class="text-dark">{{post.title}}</a></h3>
-            <small class="mb-1 text-muted">{{post.created_at | timesince}} ago | {{post.author}}</small>
-            <p class="card-text">{{post.short_description | truncatewords:30}}</p>
+        <div class="card border-0 mb-4">
+          {% if post.blog_image %}
+          <img src="{{ post.blog_image.url }}" class="card-img-top rounded" alt="{{ post.title }}">
+          {% endif %}
+          <div class="card-body px-0">
+            <h3><a href="{% url 'blogs' post.slug %}" class="text-dark">{{ post.title }}</a></h3>
+            <small class="mb-1 text-muted">{{ post.created_at | timesince }} ago | {{ post.author }}</small>
+            <p class="card-text">{{ post.short_description | truncatewords:30 }}</p>
+            <a href="{% url 'blogs' post.slug %}" class="btn btn-outline-primary btn-sm">Read More</a>
           </div>
         </div>
         {% endfor %}
-        <!-- <div class="blog-post">
-          <h2 class="blog-post-title">Sample blog post</h2>
-          <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-
-          <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-         
-          <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-         
-          
-        </div> -->
-        <!-- /.blog-post -->
-
       </div>
-      <!-- /.blog-main -->
 
+      <!-- Sidebar -->
       <aside class="col-md-4 blog-sidebar">
-        <div class="p-3 mb-3 bg-light rounded">
+        <div class="p-4 mb-3 bg-light rounded">
           <h4 class="font-italic">About</h4>
-          <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          <p class="mb-0">we believe in the transformative power of AI and its potential to
+            reshape our future. Whether you're a tech enthusiast, a professional
+            in the field, or a curious learner, our blog offers a wealth of
+            resources to cater to your interests.  
+            From in-depth articles on emerging AI trends and comprehensive
+            tutorials for building your first machine learning model to detailed
+            reviews of the top AI tools available for data scientists, we cover
+            a broad spectrum of topics to fuel your passion for technology. Our
+            team of experts is dedicated to delivering high-quality content that
+            is both informative and engaging.
+    
+            >Stay tuned for regular updates, expert insights, and valuable resources
+            designed to enhance your knowledge and keep you at the
+            forefront of AI innovation.</p>
         </div>
 
-        <div class="p-3">
-          <h4 class="font-italic">Follow Us</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">LinkedIn</a></li>
+        <!-- Categories -->
+        <div class="p-4">
+          <h4 class="font-italic">Categories</h4>
+          <ol class="list-unstyled mb-0">
+            {% for cat in categories %}
+            <li><a href="{% url 'posts_by_category' cat.id %}" class="text-primary">{{ cat.category_name }}</a></li>
+            {% endfor %}
           </ol>
         </div>
-      </aside><!-- /.blog-sidebar -->
 
-    </div><!-- /.row -->
-
-  </main><!-- /.container -->
-
+        <!-- Follow Us -->
+        <div class="p-4">
+          <h4 class="font-italic">Follow Us</h4>
+          <ol class="list-unstyled">
+            <li><a href="#" class="text-primary">GitHub</a></li>
+            <li><a href="#" class="text-primary">LinkedIn</a></li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </main>
 </div>
-{% endblock %}<!-- 
-
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ipsum ex facilis nisi unde quos fuga vel reprehenderit omnis id doloribus, necessitatibus accusamus tempora consequatur, incidunt tenetur libero! Magni, minima deserunt minus et beatae iusto eum consequuntur ipsam suscipit temporibus a vero ex corrupti incidunt obcaecati culpa maxime, alias voluptates sed fugit aspernatur dolorem! Tempore, repudiandae quo quidem magnam adipisci totam cumque temporibus debitis necessitatibus, natus architecto, modi fugit? Accusantium perferendis obcaecati dignissimos eos facere aspernatur itaque qui veniam, non similique, officia placeat quibusdam reiciendis expedita id, vel ad blanditiis vero quos earum rem! Commodi dignissimos quas et officia itaque.
-
-  -->
+{% endblock %}
