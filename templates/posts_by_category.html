@@ -25,6 +25,7 @@ background-blend-mode: overlay;background-size:cover;">
         <div class="card border-0" >
           <div class="card-body">
             <h3><a href="{% url 'blogs' post.slug %}" class="text-primary">{{post.title}}</a></h3>
+                <img src="{{ post.blog_image.url}}" alt="" width="100%">
             <small class="mb-1 text-muted">{{post.created_at | timesince}} ago | {{post.author}}</small>
             <p class="card-text">{{post.short_description | truncatewords:30}}</p>
           </div>
